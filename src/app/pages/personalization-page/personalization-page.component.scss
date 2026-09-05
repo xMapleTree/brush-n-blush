@@ -1,0 +1,308 @@
+@use "sass:color";
+@use '../../../variables' as *;
+
+:host {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    min-height: 100dvh;
+    background-color: $bg-dark;
+    padding: calc(1rem + env(safe-area-inset-top, 0px)) 1.25rem calc(1.5rem + env(safe-area-inset-bottom, 0px));
+    box-sizing: border-box;
+}
+
+.back-btn {
+    position: absolute;
+    top: calc(1rem + env(safe-area-inset-top, 0px));
+    left: 1.25rem;
+    background-color: color.adjust($bg-dark, $lightness: 8%);
+    border: none;
+    border-radius: 50%;
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    color: $text-light;
+    z-index: 20;
+    transition: transform 0.1s ease, background-color 0.2s ease;
+
+    &:active {
+        transform: scale(0.92);
+    }
+}
+
+.content-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 440px;
+    margin: auto 0;
+    gap: 1.25rem;
+}
+
+.page-header {
+    text-align: center;
+
+    .page-title {
+        font-family: $font-heading;
+        font-size: clamp(1.6rem, 5vw, 2rem);
+        font-weight: 700;
+        color: $text-light;
+        margin: 0;
+        text-shadow: 0 0.1rem 0.25rem rgba(0, 0, 0, 0.25);
+    }
+
+    .page-subtitle {
+        font-size: 0.85rem;
+        font-weight: 500;
+        color: rgba($text-light, 0.75);
+        margin: 0.35rem 0 0;
+    }
+}
+
+.form-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.section-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+
+    .group-title {
+        font-family: $font-heading;
+        font-size: 1rem;
+        font-weight: 700;
+        color: $text-light;
+        letter-spacing: 0.3px;
+    }
+}
+
+.cards-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0.65rem;
+
+    .exp-card {
+        background-color: $bg-pale;
+        border-radius: 18px;
+        padding: 0.85rem 1rem;
+        cursor: pointer;
+        border: 2px solid transparent;
+        transition: transform 0.1s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+
+        &:active {
+            transform: scale(0.98);
+        }
+
+        &.active {
+            border-color: $brand-terracotta;
+            background-color: color.adjust($bg-pale, $lightness: 2%);
+
+            .radio-indicator {
+                border-color: $brand-terracotta;
+                background-color: $brand-terracotta;
+                box-shadow: inset 0 0 0 3px $bg-pale;
+            }
+
+            .exp-title {
+                color: $brand-terracotta;
+            }
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.25rem;
+
+            .exp-title {
+                font-family: $font-heading;
+                font-size: 1.05rem;
+                font-weight: 700;
+                color: $text-dark;
+                transition: color 0.2s ease;
+            }
+
+            .radio-indicator {
+                width: 16px;
+                height: 16px;
+                border-radius: 50%;
+                border: 2px solid color.adjust($bg-pale, $lightness: -20%);
+                transition: all 0.2s ease;
+            }
+        }
+
+        .exp-desc {
+            font-size: 0.78rem;
+            color: color.adjust($text-dark, $lightness: 20%);
+            margin: 0;
+            line-height: 1.35;
+        }
+    }
+}
+
+.autocomplete-box {
+    position: relative;
+    width: 100%;
+
+    .input-wrapper {
+        width: 100%;
+
+        .search-input {
+            width: 100%;
+            box-sizing: border-box;
+            background-color: $bg-pale;
+            border: 2px solid transparent;
+            border-radius: 16px;
+            padding: 0.75rem 1rem;
+            font-family: $font-heading;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: $text-dark;
+            outline: none;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.15);
+            transition: border-color 0.2s ease;
+
+            &::placeholder {
+                color: color.adjust($text-dark, $lightness: 35%);
+                font-weight: 500;
+            }
+
+            &:focus {
+                border-color: $brand-terracotta;
+            }
+        }
+    }
+
+    .dropdown-list {
+        position: absolute;
+        top: calc(100% + 6px);
+        left: 0;
+        right: 0;
+        background-color: $bg-pale;
+        border-radius: 16px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+        max-height: 180px;
+        overflow-y: auto;
+        z-index: 30;
+        display: flex;
+        flex-direction: column;
+        padding: 0.35rem;
+
+        .dropdown-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: none;
+            border: none;
+            border-radius: 10px;
+            padding: 0.6rem 0.85rem;
+            cursor: pointer;
+            text-align: left;
+            transition: background-color 0.15s ease;
+
+            &:hover {
+                background-color: color.adjust($bg-pale, $lightness: -6%);
+            }
+
+            .item-name {
+                font-family: $font-heading;
+                font-size: 0.9rem;
+                font-weight: 600;
+                color: $text-dark;
+            }
+
+            .item-action {
+                font-size: 0.75rem;
+                font-weight: 700;
+                color: $brand-terracotta;
+            }
+
+            &.custom-create {
+                border-top: 1px solid color.adjust($bg-pale, $lightness: -10%);
+                border-radius: 0 0 10px 10px;
+
+                .item-name {
+                    color: $brand-terracotta;
+                }
+            }
+        }
+    }
+}
+
+.selected-tags-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+    min-height: 38px;
+
+    .tag-chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.4rem;
+        background-color: color.adjust($bg-dark, $lightness: 10%);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        padding: 0.35rem 0.65rem 0.35rem 0.8rem;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+
+        .tag-label {
+            font-family: $font-heading;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: $text-light;
+        }
+
+        .tag-remove {
+            background: none;
+            border: none;
+            color: rgba($text-light, 0.6);
+            font-size: 1.15rem;
+            line-height: 1;
+            padding: 0;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.15s ease;
+
+            &:hover {
+                color: $brand-blush;
+            }
+        }
+    }
+
+    .empty-hint {
+        font-size: 0.8rem;
+        color: rgba($text-light, 0.5);
+        font-style: italic;
+    }
+}
+
+.btn-save {
+    font-family: $font-heading;
+    font-size: 1.1rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 20px;
+    padding: clamp(0.8rem, 1.8vh, 0.95rem) 1rem;
+    background-color: $brand-terracotta;
+    color: $text-light;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    margin-top: 0.5rem;
+    transition: transform 0.1s ease, filter 0.2s ease;
+
+    &:active {
+        transform: scale(0.97);
+    }
+}

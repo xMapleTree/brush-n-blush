@@ -1,0 +1,63 @@
+any:
+    main:
+        [button] settings
+    actions:
+        on "settings" click goes to settings page
+
+settings:
+    main:
+        [select] language
+        [button] data reset
+        [/] authentication
+        [button] "back"
+    actions:
+        on "back" click goes to previous page
+
+home:
+    main:
+        logo
+        [button] "solo session"
+        [button] "partner session"
+        authorized:
+            buttons to go for stats
+    extra:
+        authorized:
+            stats
+            xp bar
+    actions:
+        on "session" click goes to session page
+        on "stats" click goes to stats page
+
+personalization:
+    main:
+        [select] level {Beginner/Intermediate/Expert}
+        [add-item-list] implements (Paddle),(Ruler),(Hairbrush) etc.
+        [button] "save"
+        [button] "back"
+    actions:
+        on "save" click saves changes
+        on "back" click returns to either home page or session page (depending whether session is in process)
+
+session:
+    main:
+        [button] "start"
+        if solo:
+            []
+        else:
+            []
+    actions:
+        on "start" click:
+            if solo:
+                if preferences set:
+                    proceeds to additional questions for session
+                else:
+                    goes to personalization page
+            else:
+                ...
+
+stats:
+    main:
+        ...
+        [button] "back"
+    actions:
+        on "back" click returns to home page

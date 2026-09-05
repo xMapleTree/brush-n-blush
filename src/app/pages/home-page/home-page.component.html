@@ -1,0 +1,63 @@
+<button class="settings-btn" routerLink="/settings" aria-label="Settings">
+    <app-svg-icon class="settings-icon" name="settings" [size]="20"></app-svg-icon>
+</button>
+  
+<div class="content-wrapper">
+    <header class="app-header">
+        <img class="logo" src="assets/images/logo.png" alt="Brush and Blush">
+        <h1 class="brand-title">
+            <span class="text-brush">Brush</span>
+            <span class="text-ampersand">&amp;</span>
+            <span class="text-blush">Blush</span>
+        </h1>
+    </header>
+  
+    <main class="action-buttons">
+        <button class="btn btn-solo" (click)="onSoloSession()">
+            <app-svg-icon name="solo" class="btn-icon" />
+            <span>{{ 'startPractice' | translate }}</span>
+        </button>
+      
+        <button class="btn btn-partner" disabled>
+            <app-svg-icon name="partner" class="btn-icon" />
+            <span>{{ 'partnerPlay' | translate }}</span>
+            <span class="badge-soon">{{ 'badgeSoon' | translate }}</span>
+        </button>
+    </main>
+  
+    @if (authorized) {
+        @let stats = userStats();
+        <section class="dashboard-section">
+            <div class="card stats-card">
+                <div class="stat-col">
+                    <span class="stat-num">{{ stats.sessionCount }}</span>
+                    <span class="stat-lbl">{{ 'totalSessions' | translate }}</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-col">
+                    <span class="stat-num">{{ stats.impactCount }}</span>
+                    <span class="stat-lbl">{{ 'totalImpacts' | translate }}</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-col">
+                    <span class="stat-num stat-text">{{ stats.lastPlay }}</span>
+                    <span class="stat-lbl">Last Play</span>
+                </div>
+            </div>
+      
+            <div class="card level-card">
+                <div class="rank-row">
+                    <span class="rank-title">{{ stats.rank }}</span>
+                    <span class="rank-level">Lvl {{ stats.lvl }}</span>
+                </div>
+                <div class="progress-track">
+                    <div class="progress-fill" [style.width.%]="(stats.current_xp / stats.required_xp) * 100"></div>
+                </div>
+                <div class="xp-counter">
+                    <span class="xp-current">{{ stats.current_xp | number }} XP</span>
+                    <span class="xp-next">/ {{ stats.required_xp | number }} XP to Next Rank</span>
+                </div>
+            </div>
+        </section>
+    }
+</div>

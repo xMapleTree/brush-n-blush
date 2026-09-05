@@ -1,0 +1,14 @@
+home:
+    actions:
+        on "Solo Session" click:
+            if unauthorized:
+                check: "PreferencesService.isConfigured() (из localStorage)"
+                
+                branch "isConfigured === false (Первый вход)":
+                    navigate to: "/personalization"
+                    state: { returnUrl: "/session" }
+                    goal: "Пользователь выбирает опыт и отмечает девайсы в наличии"
+                
+                branch "isConfigured === true (Повторный вход)":
+                    navigate to: "/session"
+                    goal: "Переход сразу к настройке параметров текущей сессии"

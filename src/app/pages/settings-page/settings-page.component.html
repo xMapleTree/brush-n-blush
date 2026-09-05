@@ -1,0 +1,80 @@
+<button class="back-btn" (click)="goBack()" aria-label="Go Back">
+    <app-svg-icon name="arrow-left" [size]="20"></app-svg-icon>
+</button>
+
+<div class="content-wrapper">
+    <header class="settings-header">
+        <h1 class="page-title">{{ 'settingsTitle' | translate }}</h1>
+    </header>
+
+    <main class="settings-content">
+        <div class="card settings-card">
+            <div class="setting-item">
+                <div class="setting-info">
+                    <span class="setting-label">{{ 'account' | translate }}</span>
+                    <span class="setting-desc">{{ 'accountDesc' | translate }}</span>
+                </div>
+                <button class="btn btn-primary" (click)="onAuth()">{{ 'signIn' | translate }}</button>
+            </div>
+        </div>
+
+        <div class="card settings-card">
+            <div class="setting-item">
+                <div class="setting-info">
+                    <span class="setting-label">{{ 'aiGenerator' | translate }}</span>
+                    <span class="setting-desc">{{ 'aiGeneratorDesc' | translate }}</span>
+                </div>
+                <label class="switch">
+                    <input 
+                        type="checkbox" 
+                        [checked]="preferenceService.useAiGenerator()"
+                        (change)="onToggleAi($event)" />
+                    <span class="slider"></span>
+                </label>
+            </div>
+
+            @if (preferenceService.useAiGenerator()) {
+                <div class="api-key-box">
+                    <span class="input-label">{{ 'apiKeyLabel' | translate }}</span>
+                    <input 
+                        type="password" 
+                        class="text-input" 
+                        placeholder="sk-..." 
+                        [value]="preferenceService.deepSeekApiKey()"
+                        (input)="onApiKeyChange($event)" />
+                    <span class="input-hint">{{ 'apiKeyHint' | translate }}</span>
+                </div>
+            }
+        </div>
+
+        <div class="card settings-card">
+            <div class="setting-item">
+                <div class="setting-info">
+                    <span class="setting-label">{{ 'language' | translate }}</span>
+                    <span class="setting-desc">{{ 'languageDesc' | translate }}</span>
+                </div>
+                <div class="custom-select-wrapper">
+                    <select class="select-control" (change)="onLanguageChange($event)">
+                        @for (lang of availableLanguages; track lang.code) {
+                            <option 
+                                [value]="lang.code" 
+                                [selected]="lang.code === translationService.currentLang()">
+                                {{ lang.label }}
+                            </option>
+                        }
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <div class="card settings-card">
+            <div class="setting-item">
+                <div class="setting-info">
+                    <span class="setting-label">{{ 'dataHistory' | translate }}</span>
+                    <span class="setting-desc">{{ 'dataHistoryDesc' | translate }}</span>
+                </div>
+                <button class="btn btn-danger" (click)="onResetStats()">{{ 'resetStats' | translate }}</button>
+            </div>
+        </div>
+    </main>
+</div>

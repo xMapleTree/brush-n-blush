@@ -1,0 +1,88 @@
+<button class="back-btn" (click)="goBack()" aria-label="Go Back">
+    <app-svg-icon name="arrow-left" [size]="20"></app-svg-icon>
+</button>
+
+<div class="content-wrapper">
+    <header class="page-header">
+        <h1 class="page-title">{{ 'personalizationTitle' | translate }}</h1>
+        <p class="page-subtitle">{{ 'personalizationSubtitle' | translate }}</p>
+    </header>
+
+    <main class="form-content">
+        <section class="section-group">
+            <span class="group-title">{{ 'experienceLevel' | translate }}</span>
+            <div class="cards-grid">
+                @for (opt of experienceOptions; track opt.level) {
+                    <div 
+                        class="exp-card" 
+                        [class.active]="selectedExperience() === opt.level"
+                        (click)="selectExperience(opt.level)">
+                        <div class="card-header">
+                            <span class="exp-title">{{ opt.titleKey | translate }}</span>
+                            <div class="radio-indicator"></div>
+                        </div>
+                        <p class="exp-desc">{{ opt.descKey | translate }}</p>
+                    </div>
+                }
+            </div>
+        </section>
+
+        <section class="section-group">
+            <span class="group-title">{{ 'availableImplements' | translate }}</span>
+            
+            <div class="autocomplete-box">
+                <div class="input-wrapper">
+                    <input 
+                        type="text" 
+                        class="search-input"
+                        [placeholder]="'searchImplementPlaceholder' | translate"
+                        [value]="searchQuery()"
+                        (input)="onSearchInput($event)"
+                        (focus)="onInputFocus()"
+                        (keydown)="onInputKeyDown($event)" />
+                </div>
+
+                @if (isDropdownOpen() && (filteredSuggestions().length > 0 || canCreateCustom())) {
+                    <div class="dropdown-list">
+                        @for (suggestion of filteredSuggestions(); track suggestion) {
+                            <button 
+                                type="button" 
+                                class="dropdown-item"
+                                (mousedown)="addImplement(suggestion)">
+                                <span class="item-name">{{ suggestion }}</span>
+                                <span class="item-action">+ Add</span>
+                            </button>
+                        }
+
+                        @if (canCreateCustom()) {
+                            <button 
+                                type="button" 
+                                class="dropdown-item custom-create"
+                                (mousedown)="addImplement(searchQuery())">
+                                <span class="item-name">Create "<strong>{{ searchQuery() }}</strong>"</span>
+                                <span class="item-action">Press Enter</span>
+                            </button>
+                        }
+                    </div>
+                }
+            </div>
+
+            <div class="selected-tags-container">
+                @for (item of selectedImplements(); track item) {
+                    <div class="tag-chip">
+                        <span class="tag-label">{{ item }}</span>
+                        <button type="button" class="tag-remove" (click)="removeImplement(item)" aria-label="Remove">
+                            &times;
+                        </button>
+                    </div>
+                } @empty {
+                    <span class="empty-hint">{{ 'noImplementsHint' | translate }}</span>
+                }
+            </div>
+        </section>
+
+        <button class="btn btn-save" (click)="saveAndContinue()">
+            <span>{{ 'saveAndContinue' | translate }}</span>
+        </button>
+    </main>
+</div>

@@ -1,0 +1,19 @@
+@use 'variables' as *;
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Nunito:wght@400;600;700&display=swap');
+
+body {
+    background-color: $bg-pale;
+    color: $text-dark;
+    font-family: $font-body;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: $font-heading;
+    color: $bg-dark;
+}

@@ -1,0 +1,508 @@
+@use "sass:color";
+@use '../../../variables' as *;
+
+:host {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    min-height: 100dvh;
+    background-color: $bg-dark;
+    padding: calc(1rem + env(safe-area-inset-top, 0px)) 1.25rem calc(1.5rem + env(safe-area-inset-bottom, 0px));
+    box-sizing: border-box;
+}
+
+.back-btn {
+    position: absolute;
+    top: calc(1rem + env(safe-area-inset-top, 0px));
+    left: 1.25rem;
+    background-color: color.adjust($bg-dark, $lightness: 8%);
+    border: none;
+    border-radius: 50%;
+    width: 38px;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    color: $text-light;
+    z-index: 10;
+    transition: transform 0.1s ease, background-color 0.2s ease;
+
+    &:active {
+        transform: scale(0.92);
+    }
+}
+
+.content-wrapper {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    max-width: 440px;
+    margin: auto 0;
+    gap: 1.25rem;
+}
+
+.phase-header {
+    text-align: center;
+
+    .page-title {
+        font-family: $font-heading;
+        font-size: clamp(1.6rem, 5vw, 2rem);
+        font-weight: 700;
+        color: $text-light;
+        margin: 0;
+        text-shadow: 0 0.1rem 0.25rem rgba(0, 0, 0, 0.25);
+    }
+
+    .page-subtitle {
+        font-size: 0.85rem;
+        font-weight: 500;
+        color: rgba($text-light, 0.75);
+        margin: 0.35rem 0 0;
+    }
+}
+
+.card {
+    background-color: $bg-pale;
+    border-radius: 24px;
+    padding: 1.25rem;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+}
+
+.btn {
+    font-family: $font-heading;
+    font-size: 1.1rem;
+    font-weight: 700;
+    border: none;
+    border-radius: 20px;
+    padding: clamp(0.8rem, 1.8vh, 0.95rem) 1rem;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+    transition: transform 0.1s ease, filter 0.2s ease;
+
+    &:active {
+        transform: scale(0.97);
+    }
+
+    &.btn-primary {
+        background-color: $brand-terracotta;
+        color: $text-light;
+    }
+}
+
+.setup-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+.config-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+
+    .group-label {
+        font-family: $font-heading;
+        font-size: 0.95rem;
+        font-weight: 700;
+        color: $text-light;
+    }
+}
+
+.segmented-control {
+    display: flex;
+    background-color: color.adjust($bg-dark, $lightness: 6%);
+    padding: 0.3rem;
+    border-radius: 16px;
+    gap: 0.25rem;
+
+    .segment-btn {
+        flex: 1;
+        background: none;
+        border: none;
+        border-radius: 12px;
+        padding: 0.6rem 0.5rem;
+        font-family: $font-heading;
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: rgba($text-light, 0.7);
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        &.active {
+            background-color: $bg-pale;
+            color: $text-dark;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        }
+    }
+}
+
+.pill-selector {
+    display: flex;
+    gap: 0.45rem;
+
+    .pill-btn {
+        flex: 1;
+        background-color: color.adjust($bg-dark, $lightness: 10%);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        padding: 0.45rem 0.25rem;
+        font-family: $font-heading;
+        font-size: 0.8rem;
+        font-weight: 600;
+        color: $text-light;
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        &.active {
+            background-color: $brand-terracotta;
+            border-color: $brand-terracotta;
+        }
+    }
+}
+
+.mood-cards {
+    display: flex;
+    gap: 0.5rem;
+
+    .mood-card {
+        flex: 1;
+        background-color: $bg-pale;
+        border: 2px solid transparent;
+        border-radius: 16px;
+        padding: 0.75rem 0.5rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 0.2rem;
+        cursor: pointer;
+        transition: all 0.2s ease;
+
+        .mood-title {
+            font-family: $font-heading;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: $text-dark;
+        }
+
+        .mood-desc {
+            font-size: 0.68rem;
+            color: color.adjust($text-dark, $lightness: 25%);
+            line-height: 1.2;
+        }
+
+        &.active {
+            border-color: $brand-terracotta;
+            background-color: color.adjust($bg-pale, $lightness: 2%);
+
+            .mood-title {
+                color: $brand-terracotta;
+            }
+        }
+    }
+}
+
+.chips-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.45rem;
+
+    .chip-item {
+        background-color: color.adjust($bg-dark, $lightness: 10%);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 12px;
+        padding: 0.45rem 0.8rem;
+        font-family: $font-heading;
+        font-size: 0.82rem;
+        font-weight: 600;
+        color: rgba($text-light, 0.6);
+        cursor: pointer;
+        transition: all 0.15s ease;
+
+        &.active {
+            background-color: $brand-blush;
+            color: $bg-dark;
+            border-color: $brand-blush;
+            font-weight: 700;
+        }
+    }
+}
+
+.active-task-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+
+    .task-topbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .stop-link {
+            background: none;
+            border: none;
+            color: rgba($text-light, 0.7);
+            font-family: $font-heading;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 0;
+
+            &:hover {
+                color: $brand-blush;
+            }
+        }
+
+        .round-badge {
+            background-color: color.adjust($bg-dark, $lightness: 10%);
+            color: $text-light;
+            font-family: $font-heading;
+            font-size: 0.85rem;
+            font-weight: 700;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+        }
+    }
+
+    .task-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        padding: 2rem 1.5rem;
+        gap: 1.5rem;
+
+        .implement-tag {
+            background-color: rgba($brand-terracotta, 0.15);
+            color: $brand-terracotta;
+            font-family: $font-heading;
+            font-size: 0.95rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            padding: 0.3rem 0.9rem;
+            border-radius: 12px;
+        }
+
+        .impact-display {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            .impact-number {
+                font-family: $font-heading;
+                font-size: clamp(3.5rem, 12vw, 4.5rem);
+                font-weight: 900;
+                color: $text-dark;
+                line-height: 1;
+            }
+
+            .impact-unit {
+                font-family: $font-heading;
+                font-size: 1.15rem;
+                font-weight: 700;
+                color: color.adjust($text-dark, $lightness: 20%);
+                text-transform: uppercase;
+                letter-spacing: 1px;
+            }
+        }
+
+        .task-details {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 0.6rem;
+            border-top: 1px solid color.adjust($bg-pale, $lightness: -8%);
+            padding-top: 1.25rem;
+
+            .detail-row {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                .detail-label {
+                    font-size: 0.82rem;
+                    font-weight: 600;
+                    color: color.adjust($text-dark, $lightness: 30%);
+                }
+
+                .detail-val {
+                    font-family: $font-heading;
+                    font-size: 0.95rem;
+                    font-weight: 700;
+                    color: $text-dark;
+                }
+            }
+        }
+    }
+
+    .task-actions {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.75rem;
+        width: 100%;
+    
+        .btn-complete {
+            width: 100%;
+    
+            &:disabled {
+                opacity: 0.7;
+                cursor: not-allowed;
+                transform: none;
+                box-shadow: none;
+            }
+        }
+    
+        .btn-skip {
+            background: none;
+            border: none;
+            color: rgba($text-light, 0.6);
+            font-family: $font-heading;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: opacity 0.15s ease, color 0.15s ease;
+    
+            &:hover:not(:disabled) {
+                color: $text-light;
+            }
+    
+            &:disabled {
+                opacity: 0.3;
+                cursor: not-allowed;
+            }
+        }
+    }
+}
+
+.feedback-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+
+    .feedback-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+        padding: 1.5rem;
+
+        .rating-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 0.5rem;
+            width: 100%;
+
+            .rating-btn {
+                aspect-ratio: 1;
+                background-color: color.adjust($bg-pale, $lightness: -6%);
+                border: 2px solid transparent;
+                border-radius: 14px;
+                font-family: $font-heading;
+                font-size: 1.15rem;
+                font-weight: 700;
+                color: $text-dark;
+                cursor: pointer;
+                transition: all 0.15s ease;
+
+                &.active {
+                    background-color: $brand-terracotta;
+                    color: $text-light;
+                    border-color: rgba(255, 255, 255, 0.3);
+                    transform: scale(1.05);
+                }
+            }
+        }
+
+        .rating-status {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.2rem;
+
+            .status-num {
+                font-family: $font-heading;
+                font-size: 1.25rem;
+                font-weight: 800;
+                color: $text-dark;
+            }
+
+            .status-desc {
+                font-size: 0.9rem;
+                font-weight: 600;
+                color: $brand-terracotta;
+            }
+        }
+    }
+}
+
+.summary-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+
+    .reward-card {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1.5rem;
+        padding: 2rem 1.5rem;
+
+        .xp-banner {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            .xp-plus {
+                font-family: $font-heading;
+                font-size: 3rem;
+                font-weight: 900;
+                color: $brand-terracotta;
+                line-height: 1;
+            }
+
+            .xp-label {
+                font-family: $font-heading;
+                font-size: 1rem;
+                font-weight: 700;
+                color: color.adjust($text-dark, $lightness: 20%);
+                text-transform: uppercase;
+                letter-spacing: 1px;
+            }
+        }
+
+        .summary-grid {
+            display: flex;
+            width: 100%;
+            justify-content: space-around;
+            border-top: 1px solid color.adjust($bg-pale, $lightness: -8%);
+            padding-top: 1.25rem;
+
+            .summary-stat {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 0.15rem;
+
+                .stat-v {
+                    font-family: $font-heading;
+                    font-size: 1.3rem;
+                    font-weight: 800;
+                    color: $text-dark;
+                }
+
+                .stat-k {
+                    font-size: 0.75rem;
+                    font-weight: 600;
+                    color: color.adjust($text-dark, $lightness: 30%);
+                }
+            }
+        }
+    }
+}
