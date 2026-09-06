@@ -1,4 +1,5 @@
-@if (phase() === 'summary') {
+@let currentPhase = phase();
+@if (currentPhase === 'summary' || currentPhase === 'setup') {
     <button class="back-btn" (click)="exitToHome()" aria-label="Exit">
         <app-svg-icon name="arrow-left" [size]="20"></app-svg-icon>
     </button>
