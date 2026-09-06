@@ -1,0 +1,84 @@
+<div class="debug-container">
+    <header class="debug-header">
+        <h1>⚙️ Session Cadence & Weight Curves Visualizer</h1>
+        <p>Анализ математических кривых, динамических весов и фактической нагрузки</p>
+    </header>
+
+    <!-- Панель управления -->
+    <div class="controls-card">
+        <div class="form-group">
+            <label>Режим (Mode):</label>
+            <select [(ngModel)]="mode">
+                <option value="endless">Endless (Волна + Фидбек)</option>
+                <option value="rounds">Rounds (Степенная прогрессия)</option>
+                <option value="oneshot">Oneshot</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Настроение (Mood):</label>
+            <select [(ngModel)]="mood">
+                <option value="progressive">Progressive</option>
+                <option value="gentle">Gentle</option>
+                <option value="strict">Strict</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Опыт (Experience):</label>
+            <select [(ngModel)]="experience">
+                <option value="Advanced">Advanced (База 40)</option>
+                <option value="Intermediate">Intermediate (База 25)</option>
+                <option value="Beginner">Beginner (База 15)</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Раундов (Rounds):</label>
+            <input type="number" [(ngModel)]="totalRounds" min="4" max="100" />
+        </div>
+
+        <button class="run-btn" (click)="runSimulation()">▶ Построить графики</button>
+    </div>
+
+    <!-- Общая статистика -->
+    @if (history.length > 0) {
+        <div class="stats-grid">
+            <div class="stat-item">
+                <span class="label">Всего ударов</span>
+                <span class="value">{{ totalImpacts }}</span>
+            </div>
+            <div class="stat-item">
+                <span class="label">Среднее / Раунд</span>
+                <span class="value">{{ avgImpacts }}</span>
+            </div>
+            <div class="stat-item">
+                <span class="label">Пиковая нагрузка</span>
+                <span class="value">{{ maxImpacts }}</span>
+            </div>
+            <div class="stat-item">
+                <span class="label">Девайсы</span>
+                <span class="value-sub">
+                    🖐 {{ implementStats['Bare Hand'] || 0 }} | 🪮 {{ implementStats['Hairbrush'] || 0 }} | 🪵 {{ implementStats['Wooden Paddle'] || 0 }} | 🪢 {{ implementStats['Leather Belt'] || 0 }}
+                </span>
+            </div>
+        </div>
+    }
+
+    <!-- Холсты для графиков -->
+    <div class="charts-container">
+        <div class="chart-card">
+            <h3>1. Входные веса и математические кривые</h3>
+            <div class="canvas-wrapper">
+                <canvas #curvesCanvas></canvas>
+            </div>
+        </div>
+
+        <div class="chart-card">
+            <h3>2. Фактически сгенерированные удары (по типу девайса)</h3>
+            <div class="canvas-wrapper">
+                <canvas #impactsCanvas></canvas>
+            </div>
+        </div>
+    </div>
+</div>
