@@ -1,0 +1,61 @@
+<div class="comparison-container">
+    <header class="header">
+        <h1>📊 Mood Output Comparison</h1>
+        <p>Сравнение динамики нагрузки и выбора девайсов на 3 режимах настроения</p>
+    </header>
+
+    <div class="controls-card">
+        <div class="form-group">
+            <label>Режим сессии:</label>
+            <select [(ngModel)]="mode">
+                <option value="endless">Endless Mode</option>
+                <option value="rounds">Rounds Mode</option>
+            </select>
+        </div>
+    
+        <div class="form-group">
+            <label>Опыт (Experience):</label>
+            <select [(ngModel)]="experience">
+                <option value="Beginner">Beginner</option>
+                <option value="Intermediate">Intermediate</option>
+                <option value="Advanced">Advanced</option>
+            </select>
+        </div>
+    
+        <div class="form-group">
+            <label>Раундов:</label>
+            <input type="number" [(ngModel)]="totalRounds" min="4" max="64" />
+        </div>
+    
+        <div class="actions-group">
+            <button class="run-btn" (click)="runComparison()">▶ Сравнить кривые</button>
+            <button class="export-btn" (click)="exportToCsv()">📥 Скачать CSV</button>
+        </div>
+    </div>
+
+    <div class="implement-legend">
+        <span class="legend-title">Маркеры девайсов:</span>
+        <span class="dot-item"><i class="dot hand"></i> Bare Hand</span>
+        <span class="dot-item"><i class="dot brush"></i> Hairbrush</span>
+        <span class="dot-item"><i class="dot paddle"></i> Wooden Paddle</span>
+        <span class="dot-item"><i class="dot belt"></i> Leather Belt</span>
+    </div>
+
+    <div class="stats-row">
+        <div class="stat-badge gentle">
+            <span>Gentle Total:</span> <b>{{ gentleTotal }}</b> (avg: {{ (gentleTotal / totalRounds).toFixed(0) }})
+        </div>
+        <div class="stat-badge progressive">
+            <span>Progressive Total:</span> <b>{{ progressiveTotal }}</b> (avg: {{ (progressiveTotal / totalRounds).toFixed(0) }})
+        </div>
+        <div class="stat-badge strict">
+            <span>Strict Total:</span> <b>{{ strictTotal }}</b> (avg: {{ (strictTotal / totalRounds).toFixed(0) }})
+        </div>
+    </div>
+
+    <div class="chart-card">
+        <div class="canvas-wrapper">
+            <canvas #comparisonCanvas></canvas>
+        </div>
+    </div>
+</div>

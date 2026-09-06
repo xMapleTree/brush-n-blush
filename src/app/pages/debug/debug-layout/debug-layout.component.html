@@ -1,0 +1,16 @@
+<div class="debug-wrapper">
+    <nav class="debug-nav">
+        <div class="nav-brand">⚙️ Debug Hub</div>
+        <div class="nav-links">
+            <a routerLink="/debug" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                Session Cadence & Weights
+            </a>
+            <a routerLink="/debug/mood-comparison" routerLinkActive="active">
+                Mood Comparison (Gentle vs Progressive vs Strict)
+            </a>
+        </div>
+    </nav>
+    <main class="debug-content">
+        <router-outlet></router-outlet>
+    </main>
+</div>
