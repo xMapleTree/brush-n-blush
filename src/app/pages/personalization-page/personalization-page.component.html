@@ -39,6 +39,7 @@
                         [value]="searchQuery()"
                         (input)="onSearchInput($event)"
                         (focus)="onInputFocus()"
+                        (blur)="onInputUnfocus()"
                         (keydown)="onInputKeyDown($event)" />
                 </div>
 
@@ -81,8 +82,13 @@
             </div>
         </section>
 
-        <button class="btn btn-save" (click)="saveAndContinue()">
-            <span>{{ 'saveAndContinue' | translate }}</span>
+        <button class="btn btn-save" (click)="onSave()">
+            @if (this.returnUrl === '/session') {
+                <span>{{ 'saveAndContinue' | translate }}</span>
+            }
+            @else {
+                <span>{{ 'saveAndStay' | translate }}</span>
+            }
         </button>
     </main>
 </div>

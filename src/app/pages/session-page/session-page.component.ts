@@ -103,29 +103,29 @@ export class SessionPageComponent {
 
     readonly isActionLocked = signal<boolean>(false);
     completeTask(): void {
-      if (this.isActionLocked()) {
-          return;
-      }
+        if (this.isActionLocked()) {
+            return;
+        }
 
-      this.lockActionCooldown();
+        this.lockActionCooldown();
 
-      const task = this.currentTask();
-      if (task) {
-          this.totalImpactsCount.update(c => c + task.impactCount);
-      }
+        const task = this.currentTask();
+        if (task) {
+            this.totalImpactsCount.update(c => c + task.impactCount);
+        }
 
-      const isLastRound = this.currentRound() >= this.totalPlannedRounds();
-      if (isLastRound) {
-          this.finishSession();
-          return;
-      }
+        const isLastRound = this.currentRound() >= this.totalPlannedRounds();
+        if (isLastRound) {
+            this.finishSession();
+            return;
+        }
 
-      const shouldCheckin = this.currentRound() % 2 === 0;
-      if (shouldCheckin) {
-          this.phase.set('feedback');
-      } else {
-          this.advanceRound();
-      }
+        const shouldCheckin = this.currentRound() % 2 === 0;
+        if (shouldCheckin) {
+            this.phase.set('feedback');
+        } else {
+            this.advanceRound();
+        }
     }
 
     submitFeedback(rating: number): void {
@@ -167,24 +167,27 @@ export class SessionPageComponent {
             activeImplements: this.selectedImplements(),
         };
     
-        const aiTask = await this.deepSeekService.generateAiTask(
-            config,
-            this.preferenceService.experience(),
-            this.currentRound(),
-            this.lastIntensityRating()
-        );
-    
-        if (aiTask) {
-            this.currentTask.set(aiTask);
-        } else {
-            const fallbackTask = this.sessionGenerator.generateTask(
+        if (this.preferenceService.useAiGenerator()) {
+            const aiTask = await this.deepSeekService.generateAiTask(
                 config,
                 this.preferenceService.experience(),
                 this.currentRound(),
                 this.lastIntensityRating()
             );
-            this.currentTask.set(fallbackTask);
+
+            if (aiTask) {
+                this.currentTask.set(aiTask);
+                return;
+            }
         }
+    
+        const generativeTask = this.sessionGenerator.generateTask(
+            config,
+            this.preferenceService.experience(),
+            this.currentRound(),
+            this.lastIntensityRating()
+        );
+        this.currentTask.set(generativeTask);
     }
 
     private lockActionCooldown(durationMs: number = 1000): void {

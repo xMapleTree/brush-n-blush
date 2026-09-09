@@ -15,13 +15,18 @@
     <main class="action-buttons">
         <button class="btn btn-solo" (click)="onSoloSession()">
             <app-svg-icon name="solo" class="btn-icon" />
-            <span>{{ 'startPractice' | translate }}</span>
+            <span>{{ 'startSolo' | translate }}</span>
         </button>
       
         <button class="btn btn-partner" disabled>
             <app-svg-icon name="partner" class="btn-icon" />
-            <span>{{ 'partnerPlay' | translate }}</span>
+            <span>{{ 'startPartner' | translate }}</span>
             <span class="badge-soon">{{ 'badgeSoon' | translate }}</span>
+        </button>
+
+        <button class="btn btn-personalization" (click)="onPersonalization()">
+            <app-svg-icon name="settings" class="btn-icon" [size]="20"></app-svg-icon>
+            <span>{{ 'personalize' | translate }}</span>
         </button>
     </main>
   

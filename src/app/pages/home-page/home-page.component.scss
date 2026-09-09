@@ -134,9 +134,13 @@
         }
     }
   
-    .btn-solo {
+    .btn-solo, .btn-personalization {
         background-color: $bg-pale;
         color: $text-dark;
+
+        app-svg-icon {
+            color: $text-dark;
+        }
     }
   
     .btn-partner {

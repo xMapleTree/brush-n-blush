@@ -24,6 +24,7 @@ export class PersonalizationPageComponent {
     private readonly translationService = inject(TranslationService);
     private readonly router = inject(Router);
     private readonly route = inject(ActivatedRoute);
+    protected returnUrl: string = '/home';
 
     readonly defaultSuggestions: string[] = [
         'Bare Hand',
@@ -101,6 +102,10 @@ export class PersonalizationPageComponent {
         this.isDropdownOpen.set(true);
     }
 
+    onInputUnfocus(): void {
+        this.isDropdownOpen.set(false);
+    }
+
     onInputKeyDown(event: KeyboardEvent): void {
         if (event.key === 'Enter') {
             event.preventDefault();
@@ -135,7 +140,14 @@ export class PersonalizationPageComponent {
         this.router.navigate(['/home']);
     }
 
-    saveAndContinue(): void {
+    ngOnInit(): void {
+        const queryReturn = this.route.snapshot.queryParamMap.get('returnUrl');
+        if (queryReturn) {
+            this.returnUrl = queryReturn;
+        }
+    }
+
+    onSave(): void {
         const implementsList = this.selectedImplements().length > 0 
             ? this.selectedImplements() 
             : ['Bare Hand'];
@@ -145,7 +157,6 @@ export class PersonalizationPageComponent {
             implementsList
         );
 
-        const returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/session';
-        this.router.navigateByUrl(returnUrl);
+        this.router.navigateByUrl(this.returnUrl);
     }
 }

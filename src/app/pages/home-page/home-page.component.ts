@@ -26,6 +26,12 @@ export class HomePageComponent {
         }
     }
 
+    onPersonalization(): void {
+        this.router.navigate(['/personalization'], {
+            queryParams: { returnUrl: '/home' }
+        });
+    }
+
     protected readonly authorized = false;
     protected readonly userStats = signal<BriefStats>({
         sessionCount: 18,

@@ -4,6 +4,7 @@ export interface TranslationDict {
     // General
     back: string;
     saveAndContinue: string;
+    saveAndStay: string;
     startSession: string;
     backToHome: string;
     cancel: string;
@@ -11,14 +12,14 @@ export interface TranslationDict {
     // Home Page
     appTitle: string;
     appSubtitle: string;
-    startPractice: string;
+    startSolo: string;
     personalize: string;
     settings: string;
     statsTitle: string;
     totalSessions: string;
     totalImpacts: string;
     currentRank: string;
-    partnerPlay: string;
+    startPartner: string;
     badgeSoon: string;
 
     // Personalization
@@ -153,17 +154,18 @@ export const TRANSLATIONS: Record<AppLanguage, TranslationDict> = {
         startSession: 'Start Session',
         backToHome: 'Back to Home',
         cancel: 'Cancel',
+        saveAndStay: "Save",
 
         appTitle: 'Brush & Blush',
         appSubtitle: 'Guided solo impact cadence',
-        startPractice: 'Start Practice',
+        startSolo: 'Start Practice',
         personalize: 'Personalize',
         settings: 'Settings',
         statsTitle: 'Your Progress',
         totalSessions: 'Sessions',
         totalImpacts: 'Total Impacts',
         currentRank: 'Rank',
-        partnerPlay: 'Partner Play',
+        startPartner: 'Partner Play',
         badgeSoon: 'Soon',
 
         personalizationTitle: 'Personalization',
@@ -286,17 +288,18 @@ export const TRANSLATIONS: Record<AppLanguage, TranslationDict> = {
         startSession: 'Почати сесію',
         backToHome: 'На головну',
         cancel: 'Скасувати',
+        saveAndStay: "Зберегти",
 
         appTitle: 'Brush & Blush',
         appSubtitle: 'Індивідуальні сесії та ритми',
-        startPractice: 'Почати практику',
+        startSolo: 'Почати практику',
         personalize: 'Персоналізація',
         settings: 'Налаштування',
         statsTitle: 'Ваш прогрес',
         totalSessions: 'Сесії',
         totalImpacts: 'Всього ударів',
         currentRank: 'Ранг',
-        partnerPlay: 'Парний режим',
+        startPartner: 'Парний режим',
         badgeSoon: 'Скоро',
 
         personalizationTitle: 'Персоналізація',
@@ -419,17 +422,18 @@ export const TRANSLATIONS: Record<AppLanguage, TranslationDict> = {
         startSession: 'Начать сессию',
         backToHome: 'На главную',
         cancel: 'Отмена',
+        saveAndStay: "Сохранить",
 
         appTitle: 'Brush & Blush',
         appSubtitle: 'Индивидуальные сессии и ритмы',
-        startPractice: 'Одиночная игра',
+        startSolo: 'Одиночная игра',
         personalize: 'Персонализация',
         settings: 'Настройки',
         statsTitle: 'Ваш прогресс',
         totalSessions: 'Сессии',
         totalImpacts: 'Всего ударов',
         currentRank: 'Ранг',
-        partnerPlay: 'Парный режим',
+        startPartner: 'Парный режим',
         badgeSoon: 'Скоро',
 
         personalizationTitle: 'Персонализация',
@@ -552,17 +556,18 @@ export const TRANSLATIONS: Record<AppLanguage, TranslationDict> = {
         startSession: 'セッション開始',
         backToHome: 'ホームへ戻る',
         cancel: 'キャンセル',
+        saveAndStay: "...",
 
         appTitle: 'Brush & Blush',
         appSubtitle: 'ガイド付きソロセッション',
-        startPractice: '練習を開始',
+        startSolo: '練習を開始',
         personalize: 'カスタマイズ',
         settings: '設定',
         statsTitle: '進行状況',
         totalSessions: 'セッション数',
         totalImpacts: '総インパクト数',
         currentRank: 'ランク',
-        partnerPlay: 'パートナープレイ',
+        startPartner: 'パートナープレイ',
         badgeSoon: '近日公開',
 
         personalizationTitle: 'カスタマイズ',

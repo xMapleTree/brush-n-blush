@@ -160,6 +160,13 @@
         color: $text-light;
     }
 
+    &:disabled {
+        opacity: 0.55;
+        cursor: not-allowed;
+        box-shadow: none;
+        filter: grayscale(20%);
+    }
+
     &.btn-danger {
         background-color: transparent;
         border: 1.5px solid rgba($brand-terracotta, 0.5);

@@ -17,7 +17,6 @@ export class DeepSeekService {
     private readonly http = inject(HttpClient);
     private readonly apiUrl = 'https://api.deepseek.com/chat/completions';
     
-    // В проде ключ обычно проксируется через собственный backend во избежание утечки
     private readonly apiKey = 'YOUR_DEEPSEEK_API_KEY';
 
     async generateAiTask(
@@ -27,27 +26,27 @@ export class DeepSeekService {
         feedback: number
     ): Promise<TaskCard | null> {
         const systemPrompt = `
-You are an impact session assistant for a guided mobile app.
-Generate a single task card strictly as valid JSON without markdown code blocks.
-Structure:
-{
-  "implement": string (must be chosen only from available list),
-  "impactCount": number (must be a multiple of 5),
-  "zone": string (short physical placement),
-  "style": string (tempo, cadence, or dynamic style)
-}
-`;
+            You are an impact session assistant for a guided mobile app.
+            Generate a single task card strictly as valid JSON without markdown code blocks.
+            Structure:
+            {
+            "implement": string (must be chosen only from available list),
+            "impactCount": number (must be a multiple of 5),
+            "zone": string (short physical placement),
+            "style": string (tempo, cadence, or dynamic style)
+            }
+        `;
 
         const userPrompt = `
-Context:
-- User Experience: ${experience}
-- Session Mood: ${config.mood}
-- Current Round: ${currentRound} of ${config.totalRounds}
-- Last Intensity Feedback (1-10 scale): ${feedback}
-- Available Implements: ${config.activeImplements.join(', ')}
+            Context:
+            - User Experience: ${experience}
+            - Session Mood: ${config.mood}
+            - Current Round: ${currentRound} of ${config.totalRounds}
+            - Last Intensity Feedback (1-10 scale): ${feedback}
+            - Available Implements: ${config.activeImplements.join(', ')}
 
-Generate the next task.
-`;
+            Generate the next task.
+        `;
 
         const headers = new HttpHeaders({
             'Content-Type': 'application/json',

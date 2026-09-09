@@ -6,7 +6,7 @@ const DEFAULT_PREFERENCES: UserPreference = {
     experience: 'Beginner',
     implements: ['Bare Hand', 'Hairbrush'],
     isConfigured: false,
-    useAiGenerator: true,
+    useAiGenerator: false,
     deepSeekApiKey: '',
 };
 

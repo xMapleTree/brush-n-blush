@@ -11,6 +11,7 @@
     background-color: $bg-dark;
     padding: calc(1rem + env(safe-area-inset-top, 0px)) 1.25rem calc(1.5rem + env(safe-area-inset-bottom, 0px));
     box-sizing: border-box;
+    overflow-y: hidden;
 }
 
 .back-btn {
